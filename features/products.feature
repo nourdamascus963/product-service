@@ -26,3 +26,11 @@ Scenario: Delete a product
   Given the product service is running
   When I delete a product with id "1"
   Then the product should be removed successfully
+Scenario: List products by availability
+  Given the product service is running
+  When I search for products by availability "true"
+  Then I should receive available products
+  Scenario: Update a product
+  Given the product service is running
+  When I update a product with id "1"
+  Then the updated product information should be returned
