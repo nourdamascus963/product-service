@@ -22,3 +22,7 @@ Scenario: List products by availability
   Given the product service is running
   When I search for products with availability "true"
   Then I should receive only available products
+Scenario: Delete a product
+  Given the product service is running
+  When I delete a product with id "1"
+  Then the product should be removed successfully
