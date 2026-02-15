@@ -2,7 +2,7 @@
 Product Service Routes
 """
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify,request
 
 app = Flask(__name__)
 
@@ -18,5 +18,14 @@ def read_product(product_id):
     """Read a product by ID"""
     for product in products:
         if product["id"] == product_id:
+            return jsonify(product), 200
+    return jsonify({"error": "Product not found"}), 404
+@app.route("/products/<int:product_id>", methods=["PUT"])
+def update_product(product_id):
+    """Update a product by ID"""
+    data = request.get_json()
+    for product in products:
+        if product["id"] == product_id:
+            product.update(data)
             return jsonify(product), 200
     return jsonify({"error": "Product not found"}), 404
