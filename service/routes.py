@@ -38,3 +38,29 @@ def delete_product(product_id):
             products.remove(product)
             return jsonify({"message": "Product has been Deleted!"}), 200
     return jsonify({"error": "Product not found"}), 404
+@app.route("/products", methods=["GET"])
+def list_all_products():
+    """List all products"""
+    return jsonify(products), 200
+
+
+@app.route("/products/name/<string:name>", methods=["GET"])
+def list_by_name(name):
+    """List products by name"""
+    result = [p for p in products if p["name"].lower() == name.lower()]
+    return jsonify(result), 200
+
+
+@app.route("/products/category/<string:category>", methods=["GET"])
+def list_by_category(category):
+    """List products by category"""
+    result = [p for p in products if p["category"].lower() == category.lower()]
+    return jsonify(result), 200
+
+
+@app.route("/products/available/<string:available>", methods=["GET"])
+def list_by_availability(available):
+    """List products by availability"""
+    is_available = available.lower() == "true"
+    result = [p for p in products if p.get("available", True) == is_available]
+    return jsonify(result), 200
