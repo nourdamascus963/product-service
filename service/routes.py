@@ -29,3 +29,12 @@ def update_product(product_id):
             product.update(data)
             return jsonify(product), 200
     return jsonify({"error": "Product not found"}), 404
+    
+@app.route("/products/<int:product_id>", methods=["DELETE"])
+def delete_product(product_id):
+    """Delete a product by ID"""
+    for product in products:
+        if product["id"] == product_id:
+            products.remove(product)
+            return jsonify({"message": "Product has been Deleted!"}), 200
+    return jsonify({"error": "Product not found"}), 404
