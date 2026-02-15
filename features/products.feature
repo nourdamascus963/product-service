@@ -14,3 +14,7 @@ Feature: Product Service API
     Given the product service is running
     When I search for products in category "Clothing"
     Then I should receive products in that category
+Scenario: List products by category
+  Given the product service is running
+  When I search for products in category "Clothing"
+  Then I should receive products in that category
