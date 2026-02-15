@@ -18,3 +18,7 @@ Scenario: List products by category
   Given the product service is running
   When I search for products in category "Clothing"
   Then I should receive products in that category
+Scenario: List products by availability
+  Given the product service is running
+  When I search for products with availability "true"
+  Then I should receive only available products
