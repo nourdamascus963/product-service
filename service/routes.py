@@ -64,3 +64,15 @@ def list_by_availability(available):
     is_available = available.lower() == "true"
     result = [p for p in products if p.get("available", True) == is_available]
     return jsonify(result), 200
+@app.route("/products", methods=["POST"])
+def create_product():
+    """Create a new product"""
+    data = request.get_json()
+    new_product = {
+        "id": len(products) + 1,
+        "name": data.get("name"),
+        "category": data.get("category"),
+        "available": data.get("available", True)
+    }
+    products.append(new_product)
+    return jsonify(new_product), 201
